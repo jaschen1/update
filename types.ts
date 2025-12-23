@@ -1,5 +1,6 @@
+
 import { Vector3, Color } from 'three';
-import 'react';
+import { ThreeElements } from '@react-three/fiber';
 
 export enum TreeState {
   CHAOS = 'CHAOS',
@@ -24,46 +25,23 @@ export interface OrnamentData {
   color: Color;
 }
 
-// Augment global JSX namespace
+// Augment the global JSX namespace to include React Three Fiber elements.
+// This resolves errors where Three.js tags (like <mesh />, <group />, etc.) are not recognized by TypeScript.
+// By extending ThreeElements, we inherit all standard Three.js object definitions.
 declare global {
   namespace JSX {
-    interface IntrinsicElements {
-      // Core
-      primitive: any;
-      group: any;
-      mesh: any;
-      instancedMesh: any;
-      points: any;
-      
-      // Geometry
-      bufferGeometry: any;
-      boxGeometry: any;
-      sphereGeometry: any;
-      planeGeometry: any;
-      coneGeometry: any;
-      torusGeometry: any;
-      octahedronGeometry: any;
-      
-      // Material
-      pointsMaterial: any;
-      shaderMaterial: any;
-      meshBasicMaterial: any;
-      meshStandardMaterial: any;
-      meshPhysicalMaterial: any;
-      
-      // Attributes
-      bufferAttribute: any;
-      
-      // Lights
-      ambientLight: any;
-      spotLight: any;
-      hemisphereLight: any;
-      
-      // Effects/Other
-      fog: any;
-
-      // Fallback
+    interface IntrinsicElements extends ThreeElements {
+      // Fallback for any other custom elements or R3F specific ones like <primitive />
       [elemName: string]: any;
+    }
+  }
+
+  // Also augment the React.JSX namespace to support environments using the modern JSX transform (React 18+).
+  namespace React {
+    namespace JSX {
+      interface IntrinsicElements extends ThreeElements {
+        [elemName: string]: any;
+      }
     }
   }
 }
