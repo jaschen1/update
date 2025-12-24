@@ -77,7 +77,7 @@ export const AnnouncementBoard: React.FC = () => {
           </div>
           
           <div className="text-[10px] font-semibold text-white/60 bg-white/10 px-3 py-1 rounded-full border border-white/20 uppercase tracking-wider w-fit backdrop-blur-md">
-            2025-12-24 15:00 上线
+            2025-12-24 18:00 上线
           </div>
 
           {/* Real Xiaohongshu Profile Card Recreation */}
